@@ -7,7 +7,8 @@ import javax.swing.Timer;
 
 /**
  * This class is the heart of the game
- * it calls
+ * Contains the constants and variables used
+ * @author Furkan Karabulut
  */
 public class Game extends JPanel implements ActionListener {
     /** Total width of the screen */
@@ -37,35 +38,58 @@ public class Game extends JPanel implements ActionListener {
     /** ascii number for the down arrow key*/
     public static final char DOWN = 40;
 
-    // The color for the snake body when snake eats apples, its color changes
-    int Red = 0;
-    int Green = 81;
-    int Blue = 0;
+    /** beginning color of snake */
+    public static final int GREN = 81;
+
+    /** starting number of additional body parts for snake */
+    public static final int START_PARTS = 6;
+
+    /** maximum rgb value for the rgb colors */
+    public static final int MAX_RGB = 255;
+
+    /** size of the score font */
+    public static final int SCORE_FONT_SIZE = 40;
+
+    /** size of the gameover font */
+    public static final int GAMEOVER_FONT_SIZE = 62;
+
+    /** The color for the snake body when snake eats apples, its color changes */
+    int red = 0;
+
+    /** Color for snake body and head */
+    int green = GREN;
+
+    /** Color for snake body and head */
+    int blue = 0;
 
     /** number of squares in the x-axis*/
-    public static final int x[] = new int[GAME_SQUARES];
+    public static final int X[] = new int[GAME_SQUARES];
 
     /** number of squares in the y-axis*/
-    public static final int y[] = new int[GAME_SQUARES];
+    public static final int Y[] = new int[GAME_SQUARES];
 
-    // the length of the snake
-    int bodyParts = 6;
-    // apples eaten by snake
+    /** the length of the snake */
+    int bodyParts = START_PARTS;
+
+    /** apples eaten by snake */
     int applesEaten;
-    // the position on the x axis of an apple
+
+    /** the position on the x axis of an apple */
     int appleX;
-    // the position on the y axis of an apple
+
+    /** the position on the y axis of an apple */
     int appleY;
 
-    // Initialize the snake direction
+    /** Initialize the snake direction */
     char direction = RIGHT;
-    // Initialize the snake movements
+
+    /** Initialize the snake movements */
     boolean running = false;
 
-    // Creating timer object
+    /** Creating timer object */
     Timer timer;
 
-    //Creating the random object for the color
+    /** Creating the random object for the color */
     Random random;
 
     /**
@@ -130,26 +154,27 @@ public class Game extends JPanel implements ActionListener {
             g.setColor(Color.RED);
             g.fillOval(appleX, appleY, SQUARE_SIZE, SQUARE_SIZE);
             
-            Color color = new Color(Red, Green, Blue);
+            Color color = new Color(red, green, blue);
             g.setColor(color);
             
             // The loop for the body and head of the snake
             for (int i = 0; i < bodyParts; i++) {
                 if (i == 0) {
                     g.setColor(color);
-                    g.fillRect(x[i], y[i], SQUARE_SIZE, SQUARE_SIZE);
+                    g.fillRect(X[i], Y[i], SQUARE_SIZE, SQUARE_SIZE);
                 } else {
                     g.setColor(color);
-                    g.fillRect(x[i], y[i], SQUARE_SIZE, SQUARE_SIZE);
+                    g.fillRect(X[i], Y[i], SQUARE_SIZE, SQUARE_SIZE);
                 }
             }
             // Set the colors and font on the score
             g.setColor(Color.RED);
-            Font font = new Font("Helvetica", Font.BOLD, 40);
+            Font font = new Font("Helvetica", Font.BOLD, SCORE_FONT_SIZE);
             g.setFont(font);
             FontMetrics metrics = getFontMetrics(g.getFont());
             g.drawString("Score: " + applesEaten, 
-                    (WIDTH - metrics.stringWidth("Score: " + applesEaten)) / 2, g.getFont().getSize());
+                    (WIDTH - metrics.stringWidth("Score: " + applesEaten)) / 2,
+                        g.getFont().getSize());
             
         } else {
             gameOver(g);
@@ -170,17 +195,17 @@ public class Game extends JPanel implements ActionListener {
      */
     public void move() {
         for(int i = bodyParts; i > 0; i--) {
-            x[i] = x[i - 1];
-            y[i] = y[i - 1];
+            X[i] = X[i - 1];
+            Y[i] = Y[i - 1];
         }
         if (direction == UP) {
-            y[0] = y[0] - SQUARE_SIZE;
+            Y[0] = Y[0] - SQUARE_SIZE;
         } else if(direction == RIGHT) {
-            x[0] = x[0] + SQUARE_SIZE;
+            X[0] = X[0] + SQUARE_SIZE;
         } else if(direction == LEFT) {
-            x[0] = x[0] - SQUARE_SIZE;
+            X[0] = X[0] - SQUARE_SIZE;
         } else if (direction == DOWN) {
-            y[0] = y[0] + SQUARE_SIZE;
+            Y[0] = Y[0] + SQUARE_SIZE;
         }
     }
 
@@ -189,15 +214,15 @@ public class Game extends JPanel implements ActionListener {
      */
     public void verifyApple() {
 
-        if((x[0] == appleX) && (y[0] == appleY)) {
+        if((X[0] == appleX) && (Y[0] == appleY)) {
             //body gets longer
             bodyParts++;
             applesEaten++;
 
             // the color of the snake changes randomly after each apple is eaten
-            Red = random.nextInt(255);
-            Green = random.nextInt(255);
-            Blue = random.nextInt(255);
+            red = random.nextInt(MAX_RGB);
+            green = random.nextInt(MAX_RGB);
+            blue = random.nextInt(MAX_RGB);
             randomApple();
         }
     }
@@ -212,18 +237,18 @@ public class Game extends JPanel implements ActionListener {
 
         //Checks if head collides body
         for(int i = bodyParts; i > 0; i--) {
-            if((x[0] == x[i]) && (y[0] == y[i])) {
+            if((X[0] == X[i]) && (Y[0] == Y[i])) {
                 running = false;
             }
         }
         // Checks if head touches border
-        if(x[0] < 0) {
+        if(X[0] < 0) {
             running = false;
-        } else if (x[0] > WIDTH) {
+        } else if (X[0] > WIDTH) {
             running = false;
-        } else if (y[0] < 0) {
+        } else if (Y[0] < 0) {
             running = false;
-        } else if (y[0] > HEIGHT) {
+        } else if (Y[0] > HEIGHT) {
             running = false;
         }
         // Stops updating the draw method
@@ -240,7 +265,7 @@ public class Game extends JPanel implements ActionListener {
 
         //Score Text
         g.setColor(Color.RED);
-        Font font = new Font("Helvetica", Font.BOLD, 40);
+        Font font = new Font("Helvetica", Font.BOLD, SCORE_FONT_SIZE);
         g.setFont(font);
         FontMetrics metrics1 = getFontMetrics(g.getFont());
         g.drawString("Score: " + applesEaten,
@@ -248,7 +273,7 @@ public class Game extends JPanel implements ActionListener {
 
         //Game Over Text
         g.setColor(Color.RED);
-        Font font2 = new Font("Helvetica", Font.BOLD, 62);
+        Font font2 = new Font("Helvetica", Font.BOLD, GAMEOVER_FONT_SIZE);
         g.setFont(font2);
         FontMetrics metrics2 = getFontMetrics(g.getFont());
         g.drawString("You are suck",
@@ -305,6 +330,8 @@ public class Game extends JPanel implements ActionListener {
                     if(direction != UP) {
                         direction = DOWN;
                     }
+                    break;
+                default:
                     break;
             }
         }

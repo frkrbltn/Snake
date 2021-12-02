@@ -3,7 +3,7 @@ import javax.swing.*;
 /**
  * This program created a game that is calles Snake
  * opens with menu then opens the game
- *
+ * @author Furkan Karabulut
  */
 public class Snake {
 
@@ -15,12 +15,14 @@ public class Snake {
         // Create the try and catch for exceptions
         try {
             // First message
-            String welcomeUser = JOptionPane.showInputDialog("Are you ready for the game? \n if you are type Y");
+            String welcomeUser = JOptionPane.showInputDialog("Are you ready for the game?" +
+                    " \n if you are type Y");
 
             // Based on the user's input
             if (welcomeUser.charAt(0) == 'y' || welcomeUser.charAt(0) == 'Y') {
-                JOptionPane.showMessageDialog(null, "This game created by " +
-                                            "Furkan Karabulut, Yazan Alshoroogi, Vijayvenkat Madapakula");
+                JOptionPane.showMessageDialog(null,
+                        "This game is created by " +
+                                "Furkan Karabulut, Yazan Alshoroogi, Vijayvenkat Madapakula");
                // Call the class
                 CallGame frame = new CallGame();
 

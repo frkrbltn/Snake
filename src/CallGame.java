@@ -3,8 +3,10 @@ import javax.swing.*;
 /**
  * This class creates the main frame for the game with title and
  * other essential features.
+ * @author Furkan Karabulut
  */
-public class CallGame extends JFrame{
+
+public class CallGame extends JFrame {
 
     /**
      * Our constructor
@@ -19,8 +21,8 @@ public class CallGame extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
 
-        /** After a long and ardous journey we tried to
-         * make a  menu swaping frames, but alas-
+        /* After a long and arduous journey we tried to
+         * make a  menu swapping frames, but alas-
          * our journey came to a screeching halt
          * as the menu could not be constructed
          * :(
