@@ -1,0 +1,45 @@
+Snake game instructions:
+
+1. Through terminal enter:
+
+	javac CallGame.java; javac Snake.java; javac Game.java 
+
+	and press enter, the java files should compile-
+
+2. Through the terminal enter:
+	
+	java Snake
+
+	the program should start running-
+
+3. A menu should pop up asking if you are ready to play the game, 
+type Y in the box and click ok to continue-
+
+4. A credit box should show up with the respective authors, press ok-
+
+5. The game should start running,
+
+Use the arrow keys on the keyboard to move the snake in four directions (up,down,left & right)
+around the screen. 
+
+The goal of Snake is to eat the most apples(the red circle) until the game ends. 
+
+The game ends when the snake comes in contact with the borders of the game window
+or when the snake comes in contact with itself.
+
+The challenge of the game is that once an apple is eaten, the snake grows longer,
+making it harder to maneuver the snake around the board without hitting the borders
+or itself. 
+
+6. Good luck and have fun! 
+
+7. Here's a cat~
+
+		   |\__/|
+                   \` ..\
+              __,.-" =__Y=
+            ."        )
+      _    /   ,    \/\_
+     ((____|    )_-\ \_-`
+      `-----'`-----` `--`
+
