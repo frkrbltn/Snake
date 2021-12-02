@@ -3,7 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class SnakeFirstPage {
+public class SnakeFirstPage extends JFrame {
     /**
      * Our constructor
      */
